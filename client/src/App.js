@@ -1,9 +1,9 @@
+import React, { useState } from "react";
 import logo from './logo.svg';
 import './App.css';
-import React from 'react';
 import ReactDOM from 'react-dom';
-import { Login } from "./Login"
-import { Register } from "./Register"
+import { Login } from "./Login";
+import { Register } from "./Register";
 
 function App() {
  /* const [data, setData] = React.useState(null);
@@ -14,9 +14,16 @@ function App() {
       .then((data) => setData(data.message));
   }, []);
   */
+ const [currentForm, setCurrentForm] = useState('login');
+ const toggleForm = (formName) => {
+  setCurrentForm(formName);
+ }
+
   return (
     <div className="App">
-      <Login />
+      {
+      currentForm === "login" ? <Login onFormSwitch = {toggleForm} /> : <Register onFormSwitch = {toggleForm} />
+      }
     </div>
   );
 }
